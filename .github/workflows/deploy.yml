@@ -32,6 +32,7 @@ jobs:
             cat "$file" >> portfolio.zip
           done
           unzip -q portfolio.zip -d _site
+          find _site/assets -type f -name "*.js" -exec sed -i 's/AI-видео для панно «Парусник»/AI-видео для панно «Девятый вал»/g' {} +
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload site
