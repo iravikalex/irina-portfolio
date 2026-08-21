@@ -36,7 +36,29 @@ jobs:
           update_file=$(find . -maxdepth 1 -type f -name "*.zip" ! -name "portfolio.zip" -print -quit)
           test -n "$update_file"
           unzip -oq "$update_file" -d _site
-          find _site/assets -type f -name "*.js" -exec sed -i 's/AI-видео для панно «Парусник»/AI-видео для панно «Девятый вал»/g' {} +
+          node <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+          const assets = path.join('_site', 'assets');
+          for (const name of fs.readdirSync(assets).filter((name) => name.endsWith('.js'))) {
+            const file = path.join(assets, name);
+            let source = fs.readFileSync(file, 'utf8');
+            source = source.replaceAll('AI-видео для панно «Парусник»', 'AI-видео для панно «Девятый вал»');
+            source = source.replaceAll('66 страниц', '65 страниц');
+            source = source.replaceAll(
+              '«Карточка шикарная. Мне очень нравится» — отзыв заказчика',
+              '«Карточка шикарная! Несмотря на то, что я отправила вам товар в пакете, где нечётко видны детали, вы сделали всё очень хорошо и красиво 😍 Мне очень нравится 👍🏻 Спасибо большое!» — отзыв заказчика'
+            );
+            source = source.replace(
+              './portfolio/cards/carrier/01.png`,`./portfolio/cards/carrier/02.png',
+              './portfolio/cards/carrier/02.png`,`./portfolio/cards/carrier/01.png'
+            );
+            fs.writeFileSync(file, source);
+          }
+          NODE
+          cp portfolio-fix.js portfolio-fix.css _site/
+          sed -i 's#</head>#<link rel="stylesheet" href="./portfolio-fix.css"></head>#' _site/index.html
+          sed -i 's#</body>#<script src="./portfolio-fix.js"></script></body>#' _site/index.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
