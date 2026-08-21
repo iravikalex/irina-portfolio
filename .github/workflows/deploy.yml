@@ -44,18 +44,16 @@ jobs:
             const file = path.join(assets, name);
             let source = fs.readFileSync(file, 'utf8');
             source = source.replaceAll('AI-видео для панно «Парусник»', 'AI-видео для панно «Девятый вал»');
+            source = source.replaceAll('portfolio/cards/carrier/01.png', 'portfolio/cards/carrier/01.jpg');
             source = source.replaceAll('66 страниц', '65 страниц');
             source = source.replaceAll(
               '«Карточка шикарная. Мне очень нравится» — отзыв заказчика',
               '«Карточка шикарная! Несмотря на то, что я отправила вам товар в пакете, где нечётко видны детали, вы сделали всё очень хорошо и красиво 😍 Мне очень нравится 👍🏻 Спасибо большое!» — отзыв заказчика'
             );
-            source = source.replace(
-              './portfolio/cards/carrier/01.png`,`./portfolio/cards/carrier/02.png',
-              './portfolio/cards/carrier/02.png`,`./portfolio/cards/carrier/01.png'
-            );
             fs.writeFileSync(file, source);
           }
           NODE
+          cp carrier-main-edited.jpg _site/portfolio/cards/carrier/01.jpg
           cp portfolio-fix.js portfolio-fix.css _site/
           sed -i 's#</head>#<link rel="stylesheet" href="./portfolio-fix.css"></head>#' _site/index.html
           sed -i 's#</body>#<script src="./portfolio-fix.js"></script></body>#' _site/index.html
