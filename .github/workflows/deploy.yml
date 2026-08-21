@@ -23,6 +23,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Assemble site
         run: |
           mkdir _site
@@ -32,16 +33,19 @@ jobs:
             cat "$file" >> portfolio.zip
           done
           unzip -q portfolio.zip -d _site
-                    update_file=$(find . -maxdepth 1 -type f -name "*.zip" ! -name "portfolio.zip" -print -quit)
+          update_file=$(find . -maxdepth 1 -type f -name "*.zip" ! -name "portfolio.zip" -print -quit)
           test -n "$update_file"
           unzip -oq "$update_file" -d _site
           find _site/assets -type f -name "*.js" -exec sed -i 's/AI-видео для панно «Парусник»/AI-видео для панно «Девятый вал»/g' {} +
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
+
       - name: Upload site
         uses: actions/upload-pages-artifact@v4
         with:
           path: _site
+
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
