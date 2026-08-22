@@ -47,18 +47,48 @@ jobs:
             source = source.replaceAll('portfolio/cards/carrier/01.png', 'portfolio/cards/carrier/01.jpg');
             source = source.replaceAll(
               'Практическое руководство объёмом 65 страниц. В проект вошли структура материала, оформление обложки, работа с текстом и изображениями, подготовка страниц к дальнейшему редактированию.',
-              'В портфолио представлен фрагмент из 5 оформленных страниц: обложка, структура и несколько разворотов. Книга находится в работе и будет дорабатываться.'
+              'В портфолио представлен фрагмент из 10 оформленных страниц: обложка, восемь страниц с текстом и изображениями и задняя обложка. Книга находится в работе и будет дорабатываться.'
             );
-            source = source.replaceAll('65 страниц', '5 страниц');
-            source = source.replaceAll('Открыть книгу в PDF', 'Перелистать 5 страниц');
+            source = source.replaceAll('65 страниц', '10 страниц');
+            source = source.replaceAll('Открыть книгу в PDF', 'Перелистать 10 страниц');
+            source = source.replaceAll(
+              'Клиентская работа · 2 слайда',
+              'Клиентская работа · исходники + 2 готовых слайда'
+            );
+            source = source.replace(
+              /(\{id:`figurines`,[\s\S]*?slides:)\[[^\]]+\](,review:)/,
+              '$1[`./portfolio/cards/figurines/01-main.png`,`./portfolio/cards/figurines/02-complete-set-new.png`,`./portfolio/cards/figurines/original-01.jpg`,`./portfolio/cards/figurines/original-02.jpg`]$2'
+            );
+            source = source.replace(
+              /(\{id:`carrier`,[\s\S]*?slides:)\[[^\]]+\]/,
+              '$1[`./portfolio/cards/carrier/01.jpg`,`./portfolio/cards/carrier/02.png`,`./portfolio/cards/carrier/03.png`,`./portfolio/cards/carrier/collage.png`]'
+            );
+            source = source.replaceAll(
+              './portfolio/visuals/fantasy-night.webp',
+              './portfolio/visuals/irina-child-bonnie.jpeg'
+            );
+            source = source.replace(
+              /,\{src:`\.\/portfolio\/visuals\/bonnie-cutout\.webp`,label:`Обтравка изображения`\}/g,
+              ''
+            );
             source = source.replaceAll(
               '«Карточка шикарная. Мне очень нравится» — отзыв заказчика',
               '«Карточка шикарная! Несмотря на то, что я отправила вам товар в пакете, где нечётко видны детали, вы сделали всё очень хорошо и красиво 😍 Мне очень нравится 👍🏻 Спасибо большое!» — отзыв заказчика'
+            );
+            source = source.replace(
+              '{title:`Анимация вращения`,description:`Короткий тест движения для акцента на товаре и удержания внимания.`,src:`./portfolio/videos/rotation.mp4`,poster:`./portfolio/videos/rotation.jpg`,tag:`Анимация`}',
+              '{title:`Анимация вращения`,description:`Короткий тест движения для акцента на товаре и удержания внимания.`,src:`./portfolio/videos/rotation.mp4`,poster:`./portfolio/videos/rotation.jpg`,tag:`Анимация`},{title:`AI-история «Бонни и Вася»`,description:`Короткий сказочный сюжет с живой мимикой ребёнка, движением персонажей и переходом в волшебный лес.`,src:`./portfolio/videos/vasya-bonnie-story.mp4`,poster:`./portfolio/videos/vasya-bonnie-story.jpg`,tag:`AI-видео`}'
             );
             fs.writeFileSync(file, source);
           }
           NODE
           cp carrier-main-edited.jpg _site/portfolio/cards/carrier/01.jpg
+          cp carrier-collage.png _site/portfolio/cards/carrier/collage.png
+          cp figures-original-01.jpg _site/portfolio/cards/figurines/original-01.jpg
+          cp figures-original-02.jpg _site/portfolio/cards/figurines/original-02.jpg
+          cp irina-child-bonnie.jpeg _site/portfolio/visuals/irina-child-bonnie.jpeg
+          cp vasya-bonnie-story.mp4 vasya-bonnie-story.jpg _site/portfolio/videos/
+          cp book-excerpt-*.png _site/portfolio/book/
           rm -f _site/portfolio/book/epoxy-resin-guide.pdf
           cp portfolio-fix.js portfolio-fix.css _site/
           sed -i 's#</head>#<link rel="stylesheet" href="./portfolio-fix.css"></head>#' _site/index.html

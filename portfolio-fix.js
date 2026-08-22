@@ -1,10 +1,15 @@
 (() => {
   const BOOK_PAGES = [
-    "./portfolio/book/page-01.png",
-    "./portfolio/book/page-02.png",
-    "./portfolio/book/page-06.png",
-    "./portfolio/book/page-07.png",
-    "./portfolio/book/page-08.png",
+    "./portfolio/book/book-excerpt-01.png",
+    "./portfolio/book/book-excerpt-02.png",
+    "./portfolio/book/book-excerpt-03.png",
+    "./portfolio/book/book-excerpt-04.png",
+    "./portfolio/book/book-excerpt-05.png",
+    "./portfolio/book/book-excerpt-06.png",
+    "./portfolio/book/book-excerpt-07.png",
+    "./portfolio/book/book-excerpt-08.png",
+    "./portfolio/book/book-excerpt-09.png",
+    "./portfolio/book/book-excerpt-10.png",
   ];
 
   let currentPage = 0;
@@ -62,13 +67,13 @@
     backdrop.className = "flipbook-backdrop";
     backdrop.setAttribute("role", "dialog");
     backdrop.setAttribute("aria-modal", "true");
-    backdrop.setAttribute("aria-label", "Фрагмент книги «Эпоксидная смола», 5 страниц");
+    backdrop.setAttribute("aria-label", "Фрагмент книги «Эпоксидная смола», 10 страниц");
     backdrop.innerHTML = `
       <div class="flipbook-dialog">
         <div class="flipbook-head">
           <div>
             <strong>Книга «Эпоксидная смола»</strong>
-            <span>Фрагмент · 5 страниц</span>
+            <span>Фрагмент · 10 страниц</span>
           </div>
           <button class="flipbook-close" type="button" aria-label="Закрыть">×</button>
         </div>
@@ -131,7 +136,7 @@
     const newLink = replaceClick(link, 0);
     newLink.removeAttribute("href");
     newLink.removeAttribute("target");
-    newLink.textContent = "Перелистать 5 страниц";
+    newLink.textContent = "Перелистать 10 страниц";
     return true;
   }
 

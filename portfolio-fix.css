@@ -29,6 +29,50 @@
   grid-auto-flow: row !important;
 }
 
+/* В кейсе с часами верхний и нижний ряды стоят вровень с краями карточки. */
+.case-study:first-child .case-preview {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* В кейсе с гипсовыми фигурками: исходники сверху, готовые слайды снизу. */
+.case-study:nth-child(2) .case-preview {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.case-study:nth-child(2) .case-preview button:nth-child(1) {
+  grid-column: 1 !important;
+  grid-row: 2 !important;
+}
+
+.case-study:nth-child(2) .case-preview button:nth-child(2) {
+  grid-column: 2 !important;
+  grid-row: 2 !important;
+}
+
+.case-study:nth-child(2) .case-preview button:nth-child(3) {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+}
+
+.case-study:nth-child(2) .case-preview button:nth-child(4) {
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+}
+
+/* В кейсе сумки два верхних и два нижних кадра стоят вровень с краями. */
+.case-study:nth-child(3) .case-preview {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* В кейсе панно верхняя и нижняя пары также стоят вровень с краями. */
+.case-study:nth-child(4) .case-preview {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
 .case-preview button {
   width: 100% !important;
   height: auto !important;
@@ -62,6 +106,19 @@
 .gallery-modal,
 .gallery-main {
   background: #f4eee5 !important;
+}
+
+/* Показываем каждый слайд в окне просмотра целиком, без обрезки. */
+.gallery-main {
+  overflow: hidden !important;
+}
+
+.gallery-main img {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  object-fit: contain !important;
 }
 
 .gallery-footer {
@@ -273,6 +330,23 @@ body.flipbook-open {
 .flipbook-dot.active {
   background: #b98b45;
   transform: scale(1.25);
+}
+
+/* Все работы в AI-галерее имеют одинаковый визуальный размер. */
+.visual-grid button {
+  aspect-ratio: 3 / 4 !important;
+}
+
+.visual-grid img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+
+/* В рекламном слайде сохраняем заголовок в верхней части кадра. */
+.visual-grid button:nth-child(2) img {
+  object-position: center top !important;
 }
 
 @media (max-width: 780px) {
