@@ -51,6 +51,7 @@ jobs:
             );
             source = source.replaceAll('65 страниц', '10 страниц');
             source = source.replaceAll('Открыть книгу в PDF', 'Перелистать 10 страниц');
+            source = source.replaceAll('7 роликов', '8 роликов');
             source = source.replaceAll(
               'Клиентская работа · 2 слайда',
               'Клиентская работа · исходники + 2 готовых слайда'
