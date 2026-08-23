@@ -1,4 +1,4 @@
-/* Единая сетка: все превью имеют одинаковые пропорции без обрезки. */
+/* Единая сетка: все превью имеют одинаковые размеры и ровные края. */
 .hero-strip {
   min-height: 0 !important;
   gap: 12px;
@@ -19,13 +19,19 @@
 .visual-grid img {
   width: 100% !important;
   height: 100% !important;
-  object-fit: contain !important;
+  object-fit: cover !important;
+  object-position: center !important;
   background: #fffdf9 !important;
 }
 
+.case-study {
+  align-items: stretch !important;
+}
+
 .case-preview {
-  align-content: start !important;
+  align-content: stretch !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  grid-template-rows: repeat(2, minmax(0, 1fr)) !important;
   grid-auto-flow: row !important;
 }
 
@@ -76,6 +82,7 @@
 .case-preview button {
   width: 100% !important;
   height: auto !important;
+  align-self: stretch !important;
 }
 
 .case-preview.slides-3 button:last-child {
@@ -110,15 +117,31 @@
 
 /* Показываем каждый слайд в окне просмотра целиком, без обрезки. */
 .gallery-main {
+  position: relative !important;
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
   overflow: hidden !important;
 }
 
-.gallery-main img {
-  width: 100% !important;
-  height: 100% !important;
+.gallery-modal .gallery-main > img {
+  position: absolute !important;
+  inset: 16px 70px 12px !important;
+  width: calc(100% - 140px) !important;
+  height: calc(100% - 28px) !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
   max-width: 100% !important;
   max-height: 100% !important;
   object-fit: contain !important;
+  object-position: center !important;
+}
+
+@media (max-width: 540px) {
+  .gallery-modal .gallery-main > img {
+    inset: 58px 12px 8px !important;
+    width: calc(100% - 24px) !important;
+    height: calc(100% - 66px) !important;
+  }
 }
 
 .gallery-footer {

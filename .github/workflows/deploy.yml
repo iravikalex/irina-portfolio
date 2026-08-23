@@ -45,11 +45,12 @@ jobs:
             let source = fs.readFileSync(file, 'utf8');
             source = source.replaceAll('AI-видео для панно «Парусник»', 'AI-видео для панно «Девятый вал»');
             source = source.replaceAll('portfolio/cards/carrier/01.png', 'portfolio/cards/carrier/01.jpg');
-            source = source.replaceAll(
-              'Практическое руководство объёмом 65 страниц. В проект вошли структура материала, оформление обложки, работа с текстом и изображениями, подготовка страниц к дальнейшему редактированию.',
+            source = source.replace(
+              /Практическое руководство объёмом 6[56] страниц\. В проект вошли структура материала, оформление обложки, работа с текстом и изображениями, подготовка страниц к дальнейшему редактированию\./,
               'В портфолио представлен фрагмент из 10 оформленных страниц: обложка, восемь страниц с текстом и изображениями и задняя обложка. Книга находится в работе и будет дорабатываться.'
             );
             source = source.replaceAll('65 страниц', '10 страниц');
+            source = source.replaceAll('66 страниц', '10 страниц');
             source = source.replaceAll('Открыть книгу в PDF', 'Перелистать 10 страниц');
             source = source.replaceAll('7 роликов', '8 роликов');
             source = source.replaceAll(
@@ -62,7 +63,7 @@ jobs:
             );
             source = source.replace(
               /(\{id:`carrier`,[\s\S]*?slides:)\[[^\]]+\]/,
-              '$1[`./portfolio/cards/carrier/01.jpg`,`./portfolio/cards/carrier/02.png`,`./portfolio/cards/carrier/03.png`,`./portfolio/cards/carrier/collage.png`]'
+              '$1[`./portfolio/cards/carrier/01.jpg`,`./portfolio/cards/carrier/02.png`,`./portfolio/cards/carrier/03.png`,`./portfolio/cards/carrier/collage.jpg`]'
             );
             source = source.replaceAll(
               './portfolio/visuals/fantasy-night.webp',
@@ -84,12 +85,12 @@ jobs:
           }
           NODE
           cp carrier-main-edited.jpg _site/portfolio/cards/carrier/01.jpg
-          cp carrier-collage.png _site/portfolio/cards/carrier/collage.png
+          cp carrier-collage.jpg _site/portfolio/cards/carrier/collage.jpg
           cp figures-original-01.jpg _site/portfolio/cards/figurines/original-01.jpg
           cp figures-original-02.jpg _site/portfolio/cards/figurines/original-02.jpg
           cp irina-child-bonnie.jpeg _site/portfolio/visuals/irina-child-bonnie.jpeg
           cp vasya-bonnie-story.mp4 vasya-bonnie-story.jpg _site/portfolio/videos/
-          cp book-excerpt-*.png _site/portfolio/book/
+          cp book-page-*.jpg _site/portfolio/book/
           rm -f _site/portfolio/book/epoxy-resin-guide.pdf
           cp portfolio-fix.js portfolio-fix.css _site/
           sed -i 's#</head>#<link rel="stylesheet" href="./portfolio-fix.css"></head>#' _site/index.html

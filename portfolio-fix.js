@@ -1,15 +1,15 @@
 (() => {
   const BOOK_PAGES = [
-    "./portfolio/book/book-excerpt-01.png",
-    "./portfolio/book/book-excerpt-02.png",
-    "./portfolio/book/book-excerpt-03.png",
-    "./portfolio/book/book-excerpt-04.png",
-    "./portfolio/book/book-excerpt-05.png",
-    "./portfolio/book/book-excerpt-06.png",
-    "./portfolio/book/book-excerpt-07.png",
-    "./portfolio/book/book-excerpt-08.png",
-    "./portfolio/book/book-excerpt-09.png",
-    "./portfolio/book/book-excerpt-10.png",
+    "./portfolio/book/book-page-01.jpg",
+    "./portfolio/book/book-page-02.jpg",
+    "./portfolio/book/book-page-03.jpg",
+    "./portfolio/book/book-page-04.jpg",
+    "./portfolio/book/book-page-05.jpg",
+    "./portfolio/book/book-page-06.jpg",
+    "./portfolio/book/book-page-07.jpg",
+    "./portfolio/book/book-page-08.jpg",
+    "./portfolio/book/book-page-09.jpg",
+    "./portfolio/book/book-page-10.jpg",
   ];
 
   let currentPage = 0;
@@ -36,12 +36,13 @@
     });
   }
 
-  function turnPage(dialog, direction) {
+  function turnToPage(dialog, target) {
     if (turning) return;
-    const target = currentPage + direction;
     if (target < 0 || target >= BOOK_PAGES.length) return;
+    if (target === currentPage) return;
 
     turning = true;
+    const direction = target > currentPage ? 1 : -1;
     const sheet = dialog.querySelector(".flipbook-sheet");
     sheet.classList.add(direction > 0 ? "turn-next" : "turn-prev");
 
@@ -97,16 +98,16 @@
       if (event.target === backdrop) closeBook();
     });
     dialog.querySelector(".flipbook-close").addEventListener("click", closeBook);
-    dialog.querySelector(".flipbook-prev").addEventListener("click", () => turnPage(dialog, -1));
-    dialog.querySelector(".flipbook-next").addEventListener("click", () => turnPage(dialog, 1));
+    dialog.querySelector(".flipbook-prev").addEventListener("click", () => turnToPage(dialog, currentPage - 1));
+    dialog.querySelector(".flipbook-next").addEventListener("click", () => turnToPage(dialog, currentPage + 1));
     dialog.querySelector(".flipbook-book").addEventListener("click", (event) => {
       const rect = event.currentTarget.getBoundingClientRect();
-      turnPage(dialog, event.clientX < rect.left + rect.width / 2 ? -1 : 1);
+      turnToPage(dialog, currentPage + (event.clientX < rect.left + rect.width / 2 ? -1 : 1));
     });
     dialog.querySelectorAll(".flipbook-dot").forEach((dot) => {
       dot.addEventListener("click", () => {
         const target = Number(dot.dataset.page);
-        if (target !== currentPage) turnPage(dialog, target > currentPage ? 1 : -1);
+        turnToPage(dialog, target);
       });
     });
 
@@ -151,8 +152,8 @@
   document.addEventListener("keydown", (event) => {
     const dialog = document.querySelector(".flipbook-dialog");
     if (event.key === "Escape") closeBook();
-    if (dialog && event.key === "ArrowLeft") turnPage(dialog, -1);
-    if (dialog && event.key === "ArrowRight") turnPage(dialog, 1);
+    if (dialog && event.key === "ArrowLeft") turnToPage(dialog, currentPage - 1);
+    if (dialog && event.key === "ArrowRight") turnToPage(dialog, currentPage + 1);
   });
 
   if (document.readyState === "loading") {
