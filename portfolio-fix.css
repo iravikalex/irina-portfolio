@@ -435,3 +435,90 @@ body.flipbook-open {
     grid-template-columns: 1fr !important;
   }
 }
+
+
+/* Финальное выравнивание карточек: без полос и с единым нижним краем. */
+.case-study {
+  align-items: stretch !important;
+}
+
+.case-study > * {
+  min-height: 0 !important;
+  align-self: stretch !important;
+}
+
+.case-preview,
+.hero-strip,
+.visual-grid {
+  align-items: stretch !important;
+}
+
+.case-preview {
+  box-sizing: border-box !important;
+  align-self: stretch !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  background: transparent !important;
+}
+
+.case-preview button,
+.hero-strip button,
+.visual-grid button,
+.gallery-thumbs button {
+  box-sizing: border-box !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  line-height: 0 !important;
+  overflow: hidden !important;
+}
+
+.case-preview img,
+.hero-strip img,
+.visual-grid img,
+.gallery-thumbs img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  vertical-align: bottom !important;
+}
+
+/* Окно просмотра: кадр стоит по нижнему краю, а свободное поле сливается с фоном. */
+.gallery-main {
+  align-items: end !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  background: #fffdf9 !important;
+}
+
+.gallery-modal .gallery-main > img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  object-fit: contain !important;
+  object-position: center bottom !important;
+  background: #fffdf9 !important;
+  vertical-align: bottom !important;
+}
+
+.gallery-footer,
+.gallery-thumbs {
+  margin-top: 0 !important;
+}
+
+@media (max-width: 540px) {
+  .gallery-main {
+    padding: 52px 0 0 !important;
+  }
+}
