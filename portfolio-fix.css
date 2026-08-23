@@ -28,6 +28,8 @@
 }
 
 .case-preview {
+  height: 100% !important;
+  min-height: 0 !important;
   align-content: stretch !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   grid-template-rows: repeat(2, minmax(0, 1fr)) !important;
@@ -79,21 +81,25 @@
 }
 
 .case-preview button {
+  aspect-ratio: auto !important;
+  min-height: 0 !important;
   width: 100% !important;
   height: 100% !important;
   align-self: stretch !important;
   display: grid !important;
   place-items: center !important;
-  background: #fffdf9 !important;
+  overflow: hidden !important;
+  background: #e9e2d7 !important;
 }
 
-/* В карточках ничего не обрезаем: надписи и товар видны полностью. */
+/* Все четыре кадра заполняют одинаковые ячейки без белых полос. */
 .case-preview img {
+  display: block !important;
   width: 100% !important;
   height: 100% !important;
-  object-fit: contain !important;
+  object-fit: fill !important;
   object-position: center !important;
-  background: #fffdf9 !important;
+  background: #e9e2d7 !important;
 }
 
 .case-preview.slides-3 button:last-child {
@@ -123,7 +129,7 @@
 
 .gallery-modal,
 .gallery-main {
-  background: #f4eee5 !important;
+  background: #e9e2d7 !important;
 }
 
 .gallery-modal {
