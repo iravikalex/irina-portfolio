@@ -15,7 +15,6 @@
 }
 
 .hero-strip img,
-.case-preview img,
 .visual-grid img {
   width: 100% !important;
   height: 100% !important;
@@ -81,8 +80,20 @@
 
 .case-preview button {
   width: 100% !important;
-  height: auto !important;
+  height: 100% !important;
   align-self: stretch !important;
+  display: grid !important;
+  place-items: center !important;
+  background: #fffdf9 !important;
+}
+
+/* В карточках ничего не обрезаем: надписи и товар видны полностью. */
+.case-preview img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  background: #fffdf9 !important;
 }
 
 .case-preview.slides-3 button:last-child {
@@ -115,19 +126,25 @@
   background: #f4eee5 !important;
 }
 
+.gallery-modal {
+  width: min(820px, calc(100vw - 20px)) !important;
+}
+
 /* Показываем каждый слайд в окне просмотра целиком, без обрезки. */
 .gallery-main {
-  position: relative !important;
   flex: 1 1 auto !important;
   min-height: 0 !important;
+  display: grid !important;
+  place-items: center !important;
+  padding: 18px 64px 10px !important;
   overflow: hidden !important;
 }
 
 .gallery-modal .gallery-main > img {
-  position: absolute !important;
-  inset: 16px 70px 12px !important;
-  width: calc(100% - 140px) !important;
-  height: calc(100% - 28px) !important;
+  position: static !important;
+  inset: auto !important;
+  width: auto !important;
+  height: auto !important;
   min-width: 0 !important;
   min-height: 0 !important;
   max-width: 100% !important;
@@ -137,10 +154,17 @@
 }
 
 @media (max-width: 540px) {
+  .gallery-modal {
+    width: 100% !important;
+  }
+
+  .gallery-main {
+    padding: 58px 12px 8px !important;
+  }
+
   .gallery-modal .gallery-main > img {
-    inset: 58px 12px 8px !important;
-    width: calc(100% - 24px) !important;
-    height: calc(100% - 66px) !important;
+    width: auto !important;
+    height: auto !important;
   }
 }
 
