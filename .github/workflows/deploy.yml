@@ -95,6 +95,8 @@ jobs:
           cp figures-original-01.jpg _site/portfolio/cards/figurines/original-01.jpg
           cp figures-original-02.jpg _site/portfolio/cards/figurines/original-02.jpg
           cp irina-child-bonnie.jpeg _site/portfolio/visuals/irina-child-bonnie.jpeg
+          mkdir -p _site/certificates
+          cp certificates/*.pdf certificates/*.png _site/certificates/
           cp vasya-bonnie-story.mp4 vasya-bonnie-story.jpg _site/portfolio/videos/
           cp book-page-*.jpg _site/portfolio/book/
           for file in clock-*.jpg; do

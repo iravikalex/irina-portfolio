@@ -522,3 +522,39 @@ body.flipbook-open {
     padding: 52px 0 0 !important;
   }
 }
+.education-grid .qualification-certificate {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem;
+  border: 1px solid rgba(174, 137, 85, 0.35);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.06);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.education-grid .qualification-certificate:hover,
+.education-grid .qualification-certificate:focus-visible {
+  border-color: #cba968;
+  transform: translateY(-2px);
+}
+
+.education-grid .qualification-certificate img {
+  width: 6rem;
+  height: 5rem;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 0.35rem;
+}
+
+.education-grid .qualification-certificate span {
+  display: grid;
+  gap: 0.4rem;
+  line-height: 1.4;
+}
+
+.education-grid .qualification-certificate strong {
+  display: block;
+}

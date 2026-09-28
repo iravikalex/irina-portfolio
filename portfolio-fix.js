@@ -141,10 +141,46 @@
     return true;
   }
 
+  function enhanceCertificates() {
+    const grid = document.querySelector(".skills-certificates .education-grid");
+    if (!grid) return false;
+    if (grid.querySelector(".qualification-certificate")) return true;
+    const certificates = [
+      {
+        name: "Базовые знания и компетенции фрилансера",
+        image: "./certificates/freelancer-2026.png",
+        pdf: "./certificates/freelancer-2026.pdf",
+      },
+      {
+        name: "Базовые компетенции графического дизайнера",
+        image: "./certificates/graphic-designer-2026.png",
+        pdf: "./certificates/graphic-designer-2026.pdf",
+      },
+    ];
+    certificates.forEach(({ name, image, pdf }) => {
+      const link = document.createElement("a");
+      link.className = "qualification-certificate";
+      link.href = pdf;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.setAttribute("aria-label", `Открыть сертификат «${name}» (PDF)`);
+      const preview = document.createElement("img");
+      preview.src = image;
+      preview.alt = `Сертификат «${name}»`;
+      const caption = document.createElement("span");
+      const title = document.createElement("strong");
+      title.textContent = name;
+      caption.append(title, document.createTextNode("Национальная Гильдия Фрилансеров · 2026"));
+      link.append(preview, caption);
+      grid.append(link);
+    });
+    return true;
+  }
+
   function start() {
-    if (enhanceBook()) return;
+    if (enhanceBook() && enhanceCertificates()) return;
     const observer = new MutationObserver(() => {
-      if (enhanceBook()) observer.disconnect();
+      if (enhanceBook() && enhanceCertificates()) observer.disconnect();
     });
     observer.observe(document.documentElement, { childList: true, subtree: true });
   }
