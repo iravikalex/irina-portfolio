@@ -104,8 +104,8 @@ jobs:
           done
           rm -f _site/portfolio/book/epoxy-resin-guide.pdf
           cp portfolio-fix.js portfolio-fix.css _site/
-          sed -i 's#</head>#<link rel="stylesheet" href="./portfolio-fix.css"></head>#' _site/index.html
-          sed -i 's#</body>#<script src="./portfolio-fix.js"></script></body>#' _site/index.html
+          sed -i 's#</head>#<link rel="stylesheet" href="./portfolio-fix.css?v=20260928"></head>#' _site/index.html
+          sed -i 's#</body>#<script src="./portfolio-fix.js?v=20260928"></script></body>#' _site/index.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
