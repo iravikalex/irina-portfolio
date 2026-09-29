@@ -1,0 +1,14 @@
+config/profile.yaml
+config/profile.local.yaml
+.env
+.env.*
+!.env.example
+__pycache__/
+*.pyc
+my-job-agent-data/
+logs/*
+!logs/.gitkeep
+drafts/*
+!drafts/.gitkeep
+.auth/
+*.cookies.json

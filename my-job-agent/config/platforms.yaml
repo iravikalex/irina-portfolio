@@ -1,0 +1,54 @@
+{
+  "hh": {
+    "enabled": true,
+    "mode": "public_api",
+    "url": "https://api.hh.ru/vacancies",
+    "queries": [
+      "контент-менеджер",
+      "помощник менеджера маркетплейсов",
+      "дизайнер карточек",
+      "оператор чата"
+    ],
+    "days": 7,
+    "max_pages": 2
+  },
+  "kwork": {
+    "enabled": true,
+    "mode": "agent_web_or_user_text",
+    "url": "https://kwork.ru",
+    "note": "Искать реальные проекты покупателей; не выдавать услуги продавцов за заказы."
+  },
+  "workzilla": {
+    "enabled": true,
+    "mode": "authorized_session_or_user_text",
+    "url": "https://work-zilla.com"
+  },
+  "freelance": {
+    "enabled": true,
+    "mode": "agent_web_or_user_text",
+    "url": "https://freelance.ru"
+  },
+  "fl": {
+    "enabled": true,
+    "mode": "agent_web_or_user_text",
+    "url": "https://www.fl.ru"
+  },
+  "remoteok": {
+    "enabled": false,
+    "mode": "public_api",
+    "url": "https://remoteok.com/api",
+    "keywords": [
+      "content",
+      "graphic",
+      "design",
+      "support"
+    ],
+    "note": "Дополнительный источник. Проверять язык и допустимые страны; не считать worldwide автоматически подходящим."
+  },
+  "linkedin": {
+    "enabled": false,
+    "mode": "draft_only",
+    "url": "https://www.linkedin.com",
+    "note": "Автоматическая отправка не реализована. apply_linkedin.py готовит черновик."
+  }
+}

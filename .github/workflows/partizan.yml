@@ -1,0 +1,54 @@
+name: Partizan public search
+
+on:
+  pull_request:
+    paths:
+      - 'my-job-agent/**'
+      - '.github/workflows/partizan.yml'
+  workflow_dispatch:
+    inputs:
+      source:
+        description: 'Public source (no account login)'
+        type: choice
+        options: [hh, remoteok]
+        default: hh
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest discover -s my-job-agent/tests -v
+
+  collect:
+    if: github.event_name == 'workflow_dispatch'
+    needs: test
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Collect public vacancies
+        env:
+          SOURCE: ${{ inputs.source }}
+        run: python my-job-agent/scripts/run.py --source "$SOURCE" --data-dir "$RUNNER_TEMP/partizan-public"
+      - name: Save public results only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: partizan-public-vacancies
+          path: |
+            ${{ runner.temp }}/partizan-public/jobs.json
+            ${{ runner.temp }}/partizan-public/daily_report.md
+          retention-days: 7
+          if-no-files-found: warn
